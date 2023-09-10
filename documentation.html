@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Venta</title>
+    <link rel="stylesheet" href="documentation.css">
+</head>
+<body>
+    <div class="video-container">
+        <video autoplay muted loop id="video-background">
+            <source src="your-video.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+
+    <header>
+        <nav>
+            <ul>
+              <li><a href="com.html">Home</a></li>
+          <li><a href="collections.html">Collections</a></li>
+          <li><a href="documentation.html">Documentation</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+          <li><a href="login.html">Logout</a>
+          </li>
+            </ul>
+        </nav>
+    </header>
+
+
+    <div class="container">
+        <!-- Section 1 -->
+        <section class="section">
+            <h2>1. Smart Contract Deployment</h2>
+            <p><strong>Method Name:</strong> deployContract</p>
+            <p><strong>Description:</strong> This method deploys the CommentSystem smart contract to the Ethereum blockchain.</p>
+            <p><strong>Parameters:</strong> None</p>
+            <p><strong>Returns:</strong> The deployed contract address</p>
+            <p>To deploy the CommentSystem smart contract, use the deployContract method. This method does not require any parameters. It will return the address of the deployed contract on the Ethereum blockchain.</p>
+            <pre><code>const deployContract = async () => {
+  const contract = new web3.eth.Contract(CommentSystemABI);
+  const deployTx = contract.deploy({ data: CommentSystemBytecode });
+  const deployReceipt = await deployTx.send({ from: accounts[0], gas: '1000000' });
+  return deployReceipt.options.address; 
+};</code></pre>
+        </section>
+
+        <!-- Section 2 -->
+        <section class="section">
+            <h2>2. Adding a Comment</h2>
+            <p><strong>Method Name:</strong> addComment</p>
+            <p><strong>Description:</strong> This method allows users to add a new top-level comment.</p>
+            <p><strong>Parameters:</strong> user, content</p>
+            <p><strong>Returns:</strong> The transaction hash of the comment addition</p>
+            <p>To add a new top-level comment, use the addComment method. Provide the user's Ethereum address and the content of the comment. The method will add the comment to the blockchain and return the transaction hash for the addition.</p>
+            <pre><code>const addComment = async (user, content) => {
+  const contract = new web3.eth.Contract(CommentSystemABI, contractAddress);
+  const tx = contract.methods.addComment(content); 
+  const txReceipt = await tx.send({ from: user, gas: '1000000' }); 
+  return txReceipt.transactionHash; 
+};</code></pre>
+        </section>
+
+
+<section class="section">
+    <h2>2. Adding a Comment</h2>
+    <p><strong>Method Name:</strong> addComment</p>
+    <p><strong>Description:</strong> This method allows users to add a new top-level comment.</p>
+    <p><strong>Parameters:</strong> user, content</p>
+    <p><strong>Returns:</strong> The transaction hash of the comment addition</p>
+    <p>To add a new top-level comment, use the addComment method. Provide the user's Ethereum address and the content of the comment. The method will add the comment to the blockchain and return the transaction hash for the addition.</p>
+    <pre><code>const addComment = async (user, content) => {
+  const contract = new web3.eth.Contract(CommentSystemABI, contractAddress);
+  const tx = contract.methods.addComment(content); 
+  const txReceipt = await tx.send({ from: user, gas: '1000000' }); 
+  return txReceipt.transactionHash; 
+};</code></pre>
+</section>
+
+<!-- Method 3: Adding a Reply -->
+<section class="section">
+    <h2>3. Adding a Reply</h2>
+    <p><strong>Method Name:</strong> addReply</p>
+    <p><strong>Description:</strong> This method allows users to add a reply to an existing comment.</p>
+    <p><strong>Parameters:</strong> user, commentId, content</p>
+    <p><strong>Returns:</strong> The transaction hash of the reply addition</p>
+    <p>To add a reply to an existing comment, use the addReply method. Provide the user's Ethereum address, the ID of the parent comment, and the content of the reply. The method will add the reply to the blockchain and return the transaction hash for the addition.</p>
+    <pre><code>const addReply = async (user, commentId, content) => { 
+  const contract = new web3.eth.Contract(CommentSystemABI, contractAddress); 
+  const tx = contract.methods.addReply(commentId, content); 
+  const txReceipt = await tx.send({ from: user, gas: '1000000' }); 
+  return txReceipt.transactionHash; 
+};</code></pre>
+</section>
+
+<!-- Method 4: Getting Comments -->
+<section class="section">
+    <h2>4. Getting Comments</h2>
+    <p><strong>Method Name:</strong> getComments</p>
+    <p><strong>Description:</strong> This method retrieves a list of top-level comments.</p>
+    <p><strong>Parameters:</strong> None</p>
+    <p><strong>Returns:</strong> An array of comment objects</p>
+    <p>To retrieve a list of top-level comments, use the getComments method. This method does not require any parameters. It will return an array of comment objects representing the top-level comments in the system.</p>
+    <pre><code>const getComments = async () => { 
+  const contract = new web3.eth.Contract(CommentSystemABI, contractAddress); 
+  const comments = await contract.methods.getComments().call(); 
+  return comments; 
+};</code></pre>
+</section>
+
+<!-- Continue with the same structure for the remaining methods -->
+<!-- Method 5: Voting on a Comment or Reply -->
+<section class="section">
+    <h2>5. Voting on a Comment or Reply</h2>
+    <p><strong>Method Name:</strong> voteOnComment</p>
+    <p><strong>Description:</strong> This method allows users to vote on a comment or reply.</p>
+    <p><strong>Parameters:</strong> user, itemId, voteType</p>
+    <p><strong>Returns:</strong> The transaction hash of the vote transaction</p>
+    <p>To vote on a comment or reply, use the voteOnComment method. Provide the user's Ethereum address, the ID of the comment or reply, and the type of vote ("up" or "down"). The method will register the vote on the blockchain and return the transaction hash for the vote.</p>
+    <pre><code>const voteOnComment = async (user, itemId, voteType) => { 
+  const contract = new web3.eth.Contract(CommentSystemABI, contractAddress); 
+  const tx = contract.methods.voteOnComment(itemId, voteType); 
+  const txReceipt = await tx.send({ from: user, gas: '1000000' }); 
+  return txReceipt.transactionHash; 
+};</code></pre>
+</section>
+
+<!-- Method 6: Deleting a Comment or Reply -->
+<section class="section">
+    <h2>6. Deleting a Comment or Reply</h2>
+    <p><strong>Method Name:</strong> deleteItem</p>
+    <p><strong>Description:</strong> This method allows users to delete their own comments or replies.</p>
+    <p><strong>Parameters:</strong> user, itemId</p>
+    <p><strong>Returns:</strong> The transaction hash of the deletion transaction</p>
+    <p>To delete a comment or reply, use the deleteItem method. Provide the user's Ethereum address and the ID of the comment or reply. The method will delete the item from the blockchain and return the transaction hash for the deletion.</p>
+    <pre><code>const deleteItem = async (user, itemId) => { 
+  const contract = new web3.eth.Contract(CommentSystemABI, contractAddress); 
+  const tx = contract.methods.deleteItem(itemId); 
+  const txReceipt = await tx.send({ from: user, gas: '1000000' }); 
+  return txReceipt.transactionHash; 
+};</code></pre>
+</section>
+
+<!-- Continue with the same structure for the remaining methods -->
+<!-- Method 7: Reporting a Comment or Reply -->
+<section class="section">
+    <h2>7. Reporting a Comment or Reply</h2>
+    <p><strong>Method Name:</strong> reportItem</p>
+    <p><strong>Description:</strong> This method allows users to report inappropriate comments or replies.</p>
+    <p><strong>Parameters:</strong> user, itemId</p>
+    <p><strong>Returns:</strong> The transaction hash of the report transaction</p>
+    <p>To report a comment or reply as inappropriate, use the reportItem method. Provide the user's Ethereum address and the ID of the comment or reply. The method will register the report on the blockchain and return the transaction hash for the report.</p>
+    <pre><code>const reportItem = async (user, itemId) => { 
+  const contract = new web3.eth.Contract(CommentSystemABI, contractAddress); 
+  const tx = contract.methods.reportItem(itemId); 
+  const txReceipt = await tx.send({ from: user, gas: '1000000' }); 
+  return txReceipt.transactionHash; 
+};</code></pre>
+</section>
+
+<!-- Method 8: Marking a Comment or Reply as Helpful -->
+<section class="section">
+    <h2>8. Marking a Comment or Reply as Helpful</h2>
+    <p><strong>Method Name:</strong> markItemAsHelpful</p>
+    <p><strong>Description:</strong> This method allows users to mark a comment or reply as helpful.</p>
+    <p><strong>Parameters:</strong> user, itemId</p>
+    <p><strong>Returns:</strong> The transaction hash of the marking transaction</p>
+    <p>To mark a comment or reply as helpful, use the markItemAsHelpful method. Provide the user's Ethereum address and the ID of the comment or reply. The method will register the helpful mark on the blockchain and return the transaction hash for the marking.</p>
+    <pre><code>const markItemAsHelpful = async (user, itemId) => { 
+  const contract = new web3.eth.Contract(CommentSystemABI, contractAddress); 
+  const tx = contract.methods.markItemAsHelpful(itemId); 
+  const txReceipt = await tx.send({ from: user, gas: '1000000' }); 
+  return txReceipt.transactionHash; 
+};</code></pre>
+</section>
+
+<!-- Method 9: Pinning a Comment or Reply -->
+<section class="section">
+    <h2>9. Pinning a Comment or Reply</h2>
+    <p><strong>Method Name:</strong> pinItem</p>
+    <p><strong>Description:</strong> This method allows moderators to pin a comment or reply to the top.</p>
+    <p><strong>Parameters:</strong> moderator, itemId</p>
+    <p><strong>Returns:</strong> The transaction hash of the pinning transaction</p>
+    <p>To pin a comment or reply to the top, use the pinItem method. Provide the moderator's Ethereum address and the ID of the comment or reply. The method will pin the item to the top and return the transaction hash for the pinning.</p>
+    <pre><code>const pinItem = async (moderator, itemId) => { 
+  const contract = new web3.eth.Contract(CommentSystemABI, contractAddress); 
+  const tx = contract.methods.pinItem(itemId); 
+  const txReceipt = await tx.send({ from: moderator, gas: '1000000' }); 
+  return txReceipt.transactionHash; 
+};</code></pre>
+</section>
+
+<!-- Method 10: User Reputation -->
+<section class="section">
+    <h2>10. User Reputation</h2>
+    <p><strong>Method Name:</strong> getUserReputation</p>
+    <p><strong>Description:</strong> This method retrieves the reputation score of a user.</p>
+    <p><strong>Parameters:</strong> user</p>
+    <p><strong>Returns:</strong> The reputation score of the user</p>
+    <p>To retrieve the reputation score of a user, use the getUserReputation method. Provide the user's Ethereum address. The method will return the reputation score of the user.</p>
+    <pre><code>const getUserReputation = async (user) => { 
+  const contract = new web3.eth.Contract(CommentSystemABI, contractAddress); 
+  const reputation = await contract.methods.getUserReputation(user).call(); 
+  return reputation; 
+};</code></pre>
+</section>
+
+<!-- Method 11: Trending Comments -->
+<section class="section">
+    <h2>11. Trending Comments</h2>
+    <p><strong>Method Name:</strong> getTrendingComments</p>
+    <p><strong>Description:</strong> This method retrieves a list of trending comments.</p>
+    <p><strong>Parameters:</strong> None</p>
+    <p><strong>Returns:</strong> An array of comment objects</p>
+    <p>To retrieve a list of trending comments, use the getTrendingComments method. This method does not require any parameters. It will return an array of comment objects representing the trending comments in the system.</p>
+    <pre><code>const getTrendingComments = async () => { 
+  const contract = new web3.eth.Contract(CommentSystemABI, contractAddress); 
+  const trendingComments = await contract.methods.getTrendingComments().call(); 
+  return trendingComments; 
+};</code></pre>
+</section>
+
+<!-- Method 12: Nested Thread Structure -->
+<section class="section">
+    <h2>12. Nested Thread Structure</h2>
+    <p><strong>Method Name:</strong> getCommentThread</p>
+    <p><strong>Description:</strong> This method retrieves the nested thread structure of a comment.</p>
+    <p><strong>Parameters:</strong> commentId</p>
+    <p><strong>Returns:</strong> A nested thread structure object</p>
+    <p>To retrieve the nested thread structure of a comment, use the getCommentThread method. Provide the ID of the comment. The method will return a nested thread structure object representing the comment and its replies.</p>
+    <pre><code>const getCommentThread = async (commentId) => { 
+  const contract = new web3.eth.Contract(CommentSystemABI, contractAddress); 
+  const commentThread = await contract.methods.getCommentThread(commentId).call(); 
+  return commentThread; 
+};</code></pre>
+</section>
+
+<!-- Method 13: Moderation Tools -->
+<section class="section">
+    <h2>13. Moderation Tools</h2>
+    <p><strong>Method Name:</strong> moderateItem</p>
+    <p><strong>Description:</strong> This method allows moderators to moderate comments or replies.</p>
+    <p><strong>Parameters:</strong> moderator, itemId, action</p>
+    <p><strong>Returns:</strong> The transaction hash of the moderation transaction</p>
+    <p>To moderate a comment or reply, use the moderateItem method. Provide the moderator's Ethereum address, the ID of the comment or reply, and the moderation action ("approve" or "reject"). The method will execute the moderation action on the blockchain and return the transaction hash for the moderation.</p>
+    <pre><code>const moderateItem = async (moderator, itemId, action) => { 
+  const contract = new web3.eth.Contract(CommentSystemABI, contractAddress); 
+  const tx = contract.methods.moderateItem(itemId, action); 
+  const txReceipt = await tx.send({ from: moderator, gas: '1000000' }); 
+  return txReceipt.transactionHash; 
+};</code></pre>
+</section>
+
+<!-- Method 14: User Reputation (Repeating) -->
+<section class="section">
+    <h2>14. User Reputation</h2>
+    <p><strong>Method Name:</strong> getUserReputation</p>
+    <p><strong>Description:</strong> This method retrieves the reputation score of a user.</p>
+    <p><strong>Parameters:</strong> user</p>
+    <p><strong>Returns:</strong> The reputation score of the user</p>
+    <p>The getUserReputation method allows you to retrieve the reputation score of a specific user. Provide the user's Ethereum address, and the method will return the user's reputation score based on their contributions and interactions within the comment system.</p>
+    <pre><code>const getUserReputation = async (user) => { 
+  const contract = new web3.eth.Contract(CommentSystemABI, contractAddress); 
+  const reputation = await contract.methods.getUserReputation(user).call(); 
+  return reputation; 
+};</code></pre>
+</section>
+
+<!-- Method 15: Trending Comments (Repeating) -->
+<section class="section">
+    <h2>15. Trending Comments</h2>
+    <p><strong>Method Name:</strong> getTrendingComments</p>
+    <p><strong>Description:</strong> This method retrieves the currently trending comments.</p>
+    <p><strong>Parameters:</strong> None</p>
+    <p><strong>Returns:</strong> An array of trending comment objects</p>
+    <p>To fetch the comments that are currently trending, use the getTrendingComments method. This method does not require any parameters. It will return an array of comment objects that are receiving a high number of votes, replies, or other engagement metrics, indicating their popularity.</p>
+    <pre><code>const getTrendingComments = async () => { 
+  const contract = new web3.eth.Contract(CommentSystemABI, contractAddress); 
+  const trendingComments = await contract.methods.getTrendingComments().call(); 
+  return trendingComments; 
+};</code></pre>
+</section>
+
+    </div>
+
+    <a href="#" class="back-to-top">Back to Top</a>
+
+    <script src="documentation.js"></script>
+</body>
+</html>
